@@ -1,9 +1,9 @@
 ﻿using CleanArchitecture.Application.DTOs.Common;
 using CleanArchitecture.Domain;
 
-namespace CleanArchitecture.Application.DTOs;
+namespace CleanArchitecture.Application.DTOs.LeaveRequest;
 
-public class LeaveRequestDTO:BaseDTO
+public class LeaveRequestDTO : BaseDTO
 {
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }

@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{A67655F6-1372-4604-A0CB-93A1D72498F3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClieaArchitecture.Domain", "ClieaArchitecture.Domain\ClieaArchitecture.Domain.csproj", "{177BF167-52CF-4D6A-B023-FB8E7183E80F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchitecture.Domain", "ClieaArchitecture.Domain\CleanArchitecture.Domain.csproj", "{177BF167-52CF-4D6A-B023-FB8E7183E80F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchitecture.Application", "CleanArchitecture.Application\CleanArchitecture.Application.csproj", "{B1447D77-162C-4AC6-8F75-A3ABF7353AB5}"
 EndProject

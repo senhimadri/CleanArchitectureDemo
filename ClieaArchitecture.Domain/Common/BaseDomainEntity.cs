@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClieaArchitecture.Domain.Common;
+namespace CleanArchitecture.Domain.Common;
 
 public abstract class BaseDomainEntity
 {

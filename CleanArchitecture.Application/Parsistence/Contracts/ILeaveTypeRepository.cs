@@ -1,4 +1,4 @@
-﻿using ClieaArchitecture.Domain;
+﻿using CleanArchitecture.Domain;
 
 namespace CleanArchitecture.Application.Parsistence.Contracts;
 

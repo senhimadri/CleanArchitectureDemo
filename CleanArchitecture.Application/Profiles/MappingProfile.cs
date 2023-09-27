@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using CleanArchitecture.Application.DTOs;
-using ClieaArchitecture.Domain;
+using CleanArchitecture.Domain;
 
 namespace CleanArchitecture.Application.Profiles;
 

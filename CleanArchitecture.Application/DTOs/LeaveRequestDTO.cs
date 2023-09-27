@@ -1,5 +1,5 @@
 ﻿using CleanArchitecture.Application.DTOs.Common;
-using ClieaArchitecture.Domain;
+using CleanArchitecture.Domain;
 
 namespace CleanArchitecture.Application.DTOs;
 

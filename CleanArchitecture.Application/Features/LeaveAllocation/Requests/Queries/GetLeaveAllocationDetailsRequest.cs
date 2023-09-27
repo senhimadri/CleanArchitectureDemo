@@ -1,4 +1,4 @@
-﻿using CleanArchitecture.Application.DTOs;
+﻿using CleanArchitecture.Application.DTOs.LeaveAllocation;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CleanArchitecture.Application.Features.LeaveAllocation.Requests.Queries;
 
-public class GetLeaveAllocationDetailsRequest : IRequest<LeaveAllocationDTO>
+public class GetLeaveRequestDetailsRequest : IRequest<LeaveAllocationDTO>
 {
     public int Id { get; set; }
 }

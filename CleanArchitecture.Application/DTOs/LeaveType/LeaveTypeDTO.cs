@@ -1,6 +1,6 @@
 ﻿using CleanArchitecture.Application.DTOs.Common;
 
-namespace CleanArchitecture.Application.DTOs;
+namespace CleanArchitecture.Application.DTOs.LeaveType;
 
 public class LeaveTypeDTO:BaseDTO
 {

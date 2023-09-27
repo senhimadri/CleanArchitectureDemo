@@ -1,5 +1,5 @@
 ﻿using CleanArchitecture.Application.DTOs.Common;
-using CleanArchitecture.Domain;
+using CleanArchitecture.Application.DTOs.LeaveType;
 
 namespace CleanArchitecture.Application.DTOs.LeaveRequest;
 

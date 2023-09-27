@@ -1,8 +1,8 @@
-﻿using CleanArchitecture.Application.DTOs;
+﻿using CleanArchitecture.Application.DTOs.LeaveAllocation;
 using MediatR;
 
 namespace CleanArchitecture.Application.Features.LeaveAllocation.Requests.Queries;
 
-public class GetLeaveAllocationListRequest : IRequest<List<LeaveAllocationDTO>>
+public class GetLeaveRequestListRequest : IRequest<List<LeaveAllocationDTO>>
 {
 }

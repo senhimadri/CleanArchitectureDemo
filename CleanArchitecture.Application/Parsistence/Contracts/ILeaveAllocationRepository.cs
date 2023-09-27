@@ -4,5 +4,5 @@ namespace CleanArchitecture.Application.Parsistence.Contracts;
 
 public interface ILeaveAllocationRepository:IGenericRepository<ILeaveAllocationRepository>
 {
-    Task<LeaveAllocation> GetLeaveAllocationWithDetails(int id);
+    Task<LeaveAllocation> GetLeaveAllocationWithDetailsAsync(int id);
 }

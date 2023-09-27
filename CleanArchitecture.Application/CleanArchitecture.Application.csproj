@@ -16,11 +16,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\LeaveTypes - Copy\Handlers\Commands\" />
-    <Folder Include="Features\LeaveTypes - Copy\Handlers\Queries\" />
-    <Folder Include="Features\LeaveTypes - Copy\Requests\" />
+    <Folder Include="Features\LeaveAllocation\Handlers\Commands\" />
+    <Folder Include="Features\LeaveAllocation\Requests\Commands\" />
     <Folder Include="Features\LeaveTypes\Handlers\Commands\" />
+    <Folder Include="Features\LeaveTypes\Handlers\Queries\" />
     <Folder Include="Features\LeaveTypes\Requests\Commands\" />
+    <Folder Include="Features\LeaveTypes\Requests\Queries\" />
   </ItemGroup>
 
 

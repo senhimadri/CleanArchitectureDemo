@@ -6,18 +6,18 @@ using MediatR;
 
 namespace CleanArchitecture.Application.Features.LeaveTypes.Handlers.Queries;
 
-public class GetLeaveTypeListRequestHandler : IRequestHandler<GetLeaveTypeListRequest, List<LeaveTypeDTO>>
+public class GetLeaveAllocationListRequestHandler : IRequestHandler<GetLeaveAllocationListRequest, List<LeaveTypeDTO>>
 {
     private readonly ILeaveTypeRepository _leaveTypeRepository;
     private readonly IMapper _mapper;
 
-    public GetLeaveTypeListRequestHandler(ILeaveTypeRepository leaveTypeRepository,IMapper mapper)
+    public GetLeaveAllocationListRequestHandler(ILeaveTypeRepository leaveTypeRepository,IMapper mapper)
     {
         _leaveTypeRepository = leaveTypeRepository;
         _mapper = mapper;
     }
 
-    public async Task<List<LeaveTypeDTO>> Handle(GetLeaveTypeListRequest request, CancellationToken cancellationToken)
+    public async Task<List<LeaveTypeDTO>> Handle(GetLeaveAllocationListRequest request, CancellationToken cancellationToken)
     {
         var leavetype = await _leaveTypeRepository.GetAllAsync();
         return _mapper.Map<List<LeaveTypeDTO>>(leavetype);

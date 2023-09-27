@@ -8,10 +8,19 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ClieaArchitecture.Domain\CleanArchitecture.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\LeaveTypes - Copy\Handlers\Commands\" />
+    <Folder Include="Features\LeaveTypes - Copy\Handlers\Queries\" />
+    <Folder Include="Features\LeaveTypes - Copy\Requests\" />
+    <Folder Include="Features\LeaveTypes\Handlers\Commands\" />
+    <Folder Include="Features\LeaveTypes\Requests\Commands\" />
   </ItemGroup>
 
 

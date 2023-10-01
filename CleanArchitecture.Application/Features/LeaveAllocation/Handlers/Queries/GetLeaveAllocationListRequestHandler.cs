@@ -19,7 +19,7 @@ public class GetLeaveRequestListRequestHandler : IRequestHandler<GetLeaveRequest
 
     public async Task<List<LeaveAllocationDTO>> Handle(GetLeaveRequestListRequest request, CancellationToken cancellationToken)
     {
-        var leavetype = await _repository.GetAllAsync();
+        var leavetype = await _repository.GetLeaveAllocationsListWithDetailsAsync();
         return _mapper.Map<List<LeaveAllocationDTO>>(leavetype);
     }
 }

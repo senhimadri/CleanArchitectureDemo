@@ -15,8 +15,15 @@ public class DeleteLeaveTypeCommandHandler : IRequestHandler<DeleteLeaveTypeComm
         _leaveTypeRepository = leaveTypeRepository;
         _mapper = mapper;
     }
-    public Task<Unit> Handle(DeleteLeaveTypeCommand request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(DeleteLeaveTypeCommand request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var leavetype =await _leaveTypeRepository.GetAsync(request.id);
+
+        if (leavetype is null)
+            throw new Exception("Not Found.");
+
+        await _leaveTypeRepository.DeleteAsync(request.id);
+
+        return Unit.Value;
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CleanArchitecture.Application.DTOs.LeaveAllocation;
 
-public class CreateLeaveAllocationDTO
+public class CreateLeaveAllocationDTO: ILeaveAllocationDTO
 {
     public int NumberOfDays { get; set; }
     public int LeaveTypeId { get; set; }

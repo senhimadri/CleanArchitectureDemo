@@ -26,7 +26,7 @@ public class UpdateLeaveRequestCommandHandler : IRequestHandler<UpdateLeaveReque
         }
         else if(request.ChangeLeaveRequestApprovalDTO is not null)
         {
-            await _repository.ChangeApprovalStatus(leaverequest,request.ChangeLeaveRequestApprovalDTO.IsApproved)
+            await _repository.ChangeApprovalStatus(leaverequest, request.ChangeLeaveRequestApprovalDTO.IsApproved);
         }
 
         return Unit.Value;

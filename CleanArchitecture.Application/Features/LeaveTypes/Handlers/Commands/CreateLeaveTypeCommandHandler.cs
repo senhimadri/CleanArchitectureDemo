@@ -21,7 +21,7 @@ public class CreateLeaveTypeCommandHandler : IRequestHandler<CreateLeaveTypeComm
     }
     public async Task<int> Handle(CreateLeaveTypeCommand request, CancellationToken cancellationToken)
     {
-        var validator = new CreateLeaveTypeValidator();
+        var validator = new CreateLeaveTypeDTOValidator();
 
         var validationResult = await validator.ValidateAsync(request.leavetypeDTO);
 

@@ -2,14 +2,14 @@
 
 namespace CleanArchitecture.Application.DTOs.LeaveType.Validators;
 
-public class CreateLeaveTypeValidator: AbstractValidator<LeaveTypeDTO>
+public class ILeaveTypeDTOValidator:AbstractValidator<ILeaveTypeDTO>
 {
-    public CreateLeaveTypeValidator()
+    public ILeaveTypeDTOValidator()
     {
         RuleFor(p => p.Name)
-               .NotEmpty().WithMessage("{PropertyName} is required.")
-               .NotNull()
-               .MaximumLength(50).WithMessage("{PropertyName} must not exceed 50 character.");
+       .NotEmpty().WithMessage("{PropertyName} is required.")
+       .NotNull()
+       .MaximumLength(50).WithMessage("{PropertyName} must not exceed 50 character.");
 
         RuleFor(p => p.DefaultDays)
                 .NotEmpty().WithMessage("{PropertyName} is required.")

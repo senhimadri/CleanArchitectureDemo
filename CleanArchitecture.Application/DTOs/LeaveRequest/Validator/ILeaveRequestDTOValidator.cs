@@ -3,10 +3,10 @@ using FluentValidation;
 
 namespace CleanArchitecture.Application.DTOs.LeaveRequest.Validator;
 
-public class CreateLeaveRequestValidator: AbstractValidator<CreateLeaveRequestDTO>
+public class ILeaveRequestDTOValidator: AbstractValidator<IleaveRequestDTO>
 {
     private readonly ILeaveTypeRepository _leaveTypeRepository;
-    public CreateLeaveRequestValidator(ILeaveTypeRepository leaveTypeRepository)
+    public ILeaveRequestDTOValidator(ILeaveTypeRepository leaveTypeRepository)
     {
         _leaveTypeRepository = leaveTypeRepository;
         RuleFor(x => x.StartDate)
@@ -23,5 +23,4 @@ public class CreateLeaveRequestValidator: AbstractValidator<CreateLeaveRequestDT
                 return !LeavetypeExit;
             }).WithMessage("{PropertyName} does not exist.");
     }
-
 }

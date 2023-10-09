@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using CleanArchitecture.Application.Exceptions;
 using CleanArchitecture.Application.Features.LeaveRequest.Requests.Commands;
 using CleanArchitecture.Application.Parsistence.Contracts;
+using CleanArchitecture.Domain;
 using MediatR;
 
 namespace CleanArchitecture.Application.Features.LeaveRequest.Handlers.Commands;
@@ -20,7 +22,7 @@ public class DeleteLeaveRequestCommandHandler :IRequestHandler<DeleteLeaveReques
     {
         var leaverequest = await _repository.GetAsync(request.Id);
         if (leaverequest is null)
-            throw new Exception("Not Found");
+            throw new NotFoundException(name: nameof(Domain.LeaveRequest), key: request.Id);
 
         await _repository.DeleteAsync(leaverequest.Id);
 

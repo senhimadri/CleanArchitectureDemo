@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CleanArchitecture.Application.DTOs.LeaveType.Validators;
+using CleanArchitecture.Application.Exceptions;
 using CleanArchitecture.Application.Features.LeaveTypes.Requests.Commands;
 using CleanArchitecture.Application.Parsistence.Contracts;
 using MediatR;
@@ -24,7 +25,7 @@ public class UpdateLeaveTypeCommandHandler : IRequestHandler<UpdateLeaveTypeComm
         var validationResult = await validator.ValidateAsync(request.LeaveTypeDTO);
 
         if (!validationResult.IsValid)
-            throw new Exception();
+            throw new ValidationException(validationResult);
 
         var leavetype = await _leaveTypeRepository.GetAsync(request.LeaveTypeDTO.Id);
         _mapper.Map(request.LeaveTypeDTO, leavetype);

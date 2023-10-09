@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CleanArchitecture.Application.DTOs.LeaveAllocation.Validator;
+using CleanArchitecture.Application.Exceptions;
 using CleanArchitecture.Application.Features.LeaveAllocation.Requests.Commands;
 using CleanArchitecture.Application.Parsistence.Contracts;
 using MediatR;
@@ -23,7 +24,7 @@ public class UpdateLeaveAllocationCommandHandler : IRequestHandler<UpdateLeaveAl
         var validator = new UpdateLeaveAllocationDTOValidator(_LeaveTypeRepository);
         var validationResult = await validator.ValidateAsync(request.LeaveAllocationDTO);
         if (!validationResult.IsValid)
-            throw new Exception();
+            throw new ValidationException(validationResult);
 
         var leaveallocation = await _LeaveAllocationRepository.GetAsync(request.LeaveAllocationDTO.Id);
         _mapper.Map(request.LeaveAllocationDTO, leaveallocation);

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using CleanArchitecture.Application.Exceptions;
 using CleanArchitecture.Application.Features.LeaveTypes.Requests.Commands;
 using CleanArchitecture.Application.Parsistence.Contracts;
+using CleanArchitecture.Domain;
 using MediatR;
 
 namespace CleanArchitecture.Application.Features.LeaveTypes.Handlers.Commands;
@@ -20,7 +22,7 @@ public class DeleteLeaveTypeCommandHandler : IRequestHandler<DeleteLeaveTypeComm
         var leavetype =await _leaveTypeRepository.GetAsync(request.id);
 
         if (leavetype is null)
-            throw new Exception("Not Found.");
+            throw new NotFoundException(name:nameof(LeaveType),key: request.id);
 
         await _leaveTypeRepository.DeleteAsync(request.id);
 

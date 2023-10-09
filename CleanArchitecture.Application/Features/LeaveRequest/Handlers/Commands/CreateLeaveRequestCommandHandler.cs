@@ -6,6 +6,7 @@ using MediatR;
 using CleanArchitecture.Application.DTOs.LeaveType;
 using CleanArchitecture.Application.DTOs.LeaveType.Validators;
 using CleanArchitecture.Application.DTOs.LeaveRequest.Validator;
+using CleanArchitecture.Application.Exceptions;
 
 namespace CleanArchitecture.Application.Features.LeaveRequest.Handlers.Commands;
 
@@ -28,10 +29,10 @@ public class CreateLeaveRequestCommandHandler : IRequestHandler<CreateLeaveReque
         var validationResult = await validator.ValidateAsync(request.CreateLeaveRequestDTO);
 
         if (!validationResult.IsValid)
-            throw new Exception();
+            throw new ValidationException(validationResult);
 
         var leaverequest = _mapper.Map<Domain.LeaveRequest>(request.CreateLeaveRequestDTO);
-        leaverequest = await _repository.AddAsync(leaverequest);
+        leaverequest = await _LeaveRequestRepository.AddAsync(leaverequest);
         return leaverequest.Id;
     }
 }

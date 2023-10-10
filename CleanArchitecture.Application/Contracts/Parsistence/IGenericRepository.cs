@@ -1,5 +1,5 @@
 ﻿
-namespace CleanArchitecture.Application.Parsistence.Contracts;
+namespace CleanArchitecture.Application.Contracts.Parsistence;
 
 public  interface IGenericRepository<T> where T : class
 {

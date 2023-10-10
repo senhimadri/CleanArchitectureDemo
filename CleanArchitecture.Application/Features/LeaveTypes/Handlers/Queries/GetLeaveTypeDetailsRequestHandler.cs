@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using CleanArchitecture.Application.DTOs.LeaveType;
 using CleanArchitecture.Application.Features.LeaveTypes.Requests.Queries;
-using CleanArchitecture.Application.Parsistence.Contracts;
+using CleanArchitecture.Application.Contracts.Parsistence;
 using MediatR;
 
 namespace CleanArchitecture.Application.Features.LeaveTypes.Handlers.Queries;

@@ -3,7 +3,7 @@ using CleanArchitecture.Application.DTOs.LeaveType;
 using CleanArchitecture.Application.DTOs.LeaveType.Validators;
 using CleanArchitecture.Application.Exceptions;
 using CleanArchitecture.Application.Features.LeaveTypes.Requests.Commands;
-using CleanArchitecture.Application.Parsistence.Contracts;
+using CleanArchitecture.Application.Contracts.Parsistence;
 using CleanArchitecture.Domain;
 using MediatR;
 

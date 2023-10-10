@@ -1,4 +1,4 @@
-﻿using CleanArchitecture.Application.Parsistence.Contracts;
+﻿using CleanArchitecture.Application.Contracts.Parsistence;
 using CleanArchitecture.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

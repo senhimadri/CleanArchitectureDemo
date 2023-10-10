@@ -2,7 +2,7 @@
 using CleanArchitecture.Application.DTOs;
 using CleanArchitecture.Application.DTOs.LeaveRequest;
 using CleanArchitecture.Application.Features.LeaveRequest.Requests.Queries;
-using CleanArchitecture.Application.Parsistence.Contracts;
+using CleanArchitecture.Application.Contracts.Parsistence;
 using MediatR;
 
 namespace CleanArchitecture.Application.Features.LeaveRequest.Handlers.Queries;

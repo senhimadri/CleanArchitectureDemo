@@ -2,31 +2,31 @@
 using CleanArchitecture.Application.DTOs.LeaveRequest.Validator;
 using CleanArchitecture.Application.Exceptions;
 using CleanArchitecture.Application.Features.LeaveRequest.Requests.Commands;
-using CleanArchitecture.Application.Parsistence.Contracts;
+using CleanArchitecture.Application.Contracts.Parsistence;
 using MediatR;
 
 namespace CleanArchitecture.Application.Features.LeaveRequest.Handlers.Commands;
 
 public class UpdateLeaveRequestCommandHandler : IRequestHandler<UpdateLeaveRequestCommand, Unit>
 {
-    private readonly ILeaveRequestRepository _LeaveRequestRepository;
-    private readonly ILeaveTypeRepository _LeaveTypeRepository;
+    private readonly ILeaveRequestRepository _leaveRequestRepository;
+    private readonly ILeaveTypeRepository _leaveTypeRepository;
     private readonly IMapper _mapper;
 
     public UpdateLeaveRequestCommandHandler(ILeaveRequestRepository LeaveRequestRepository,ILeaveTypeRepository LeaveTypeRepository, IMapper mapper)
     {
-        _LeaveRequestRepository = LeaveRequestRepository;
-        _LeaveTypeRepository = LeaveTypeRepository;
+        _leaveRequestRepository = LeaveRequestRepository;
+        _leaveTypeRepository = LeaveTypeRepository;
         _mapper = mapper;
     }
     public async Task<Unit> Handle(UpdateLeaveRequestCommand request, CancellationToken cancellationToken)
     {
 
-        var leaverequest = await _LeaveRequestRepository.GetAsync(request.RequestId);
+        var leaverequest = await _leaveRequestRepository.GetAsync(request.RequestId);
 
         if (request.LeaveRequestDTO is not null)
         {
-            var validator = new UpdateLeaveRequestDTOValidator(_LeaveTypeRepository);
+            var validator = new UpdateLeaveRequestDTOValidator(_leaveTypeRepository);
 
             var validationResult = await validator.ValidateAsync(request.LeaveRequestDTO);
 
@@ -34,11 +34,11 @@ public class UpdateLeaveRequestCommandHandler : IRequestHandler<UpdateLeaveReque
                 throw new ValidationException(validationResult);
 
             _mapper.Map(request.LeaveRequestDTO, leaverequest);
-            await _LeaveRequestRepository.UpdateAsync(leaverequest);
+            await _leaveRequestRepository.UpdateAsync(leaverequest);
         }
         else if(request.ChangeLeaveRequestApprovalDTO is not null)
         {
-            await _LeaveRequestRepository.ChangeApprovalStatus(leaverequest, request.ChangeLeaveRequestApprovalDTO.IsApproved);
+            await _leaveRequestRepository.ChangeApprovalStatus(leaverequest, request.ChangeLeaveRequestApprovalDTO.IsApproved);
         }
 
         return Unit.Value;

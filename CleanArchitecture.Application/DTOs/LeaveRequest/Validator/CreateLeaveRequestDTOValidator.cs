@@ -1,4 +1,4 @@
-﻿using CleanArchitecture.Application.Parsistence.Contracts;
+﻿using CleanArchitecture.Application.Contracts.Parsistence;
 using FluentValidation;
 
 namespace CleanArchitecture.Application.DTOs.LeaveRequest.Validator;

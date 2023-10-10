@@ -1,6 +1,6 @@
 ﻿using CleanArchitecture.Domain;
 
-namespace CleanArchitecture.Application.Parsistence.Contracts;
+namespace CleanArchitecture.Application.Contracts.Parsistence;
 
 public interface ILeaveTypeRepository:IGenericRepository<LeaveType>
 {

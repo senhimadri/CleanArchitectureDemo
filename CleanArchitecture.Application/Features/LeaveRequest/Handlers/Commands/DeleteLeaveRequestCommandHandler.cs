@@ -24,7 +24,7 @@ public class DeleteLeaveRequestCommandHandler :IRequestHandler<DeleteLeaveReques
         if (leaverequest is null)
             throw new NotFoundException(name: nameof(Domain.LeaveRequest), key: request.Id);
 
-        await _repository.DeleteAsync(leaverequest.Id);
+        await _repository.DeleteAsync(leaverequest);
 
         return Unit.Value;
     }

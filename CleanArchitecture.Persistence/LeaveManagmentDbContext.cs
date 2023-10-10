@@ -27,6 +27,8 @@ public class LeaveManagmentDbContext: DbContext
                 entity.Entity.DateCreated = DateTime.Now;
             }
         }
+
+        return base.SaveChangesAsync(cancellationToken);
     }
 
     public DbSet<LeaveType> LeaveTypes { get; set; }

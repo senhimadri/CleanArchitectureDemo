@@ -24,7 +24,7 @@ public class DeleteLeaveTypeCommandHandler : IRequestHandler<DeleteLeaveTypeComm
         if (leavetype is null)
             throw new NotFoundException(name:nameof(LeaveType),key: request.id);
 
-        await _leaveTypeRepository.DeleteAsync(request.id);
+        await _leaveTypeRepository.DeleteAsync(leavetype);
 
         return Unit.Value;
     }

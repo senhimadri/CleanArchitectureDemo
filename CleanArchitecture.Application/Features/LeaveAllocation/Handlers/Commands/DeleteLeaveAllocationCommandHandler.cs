@@ -24,7 +24,7 @@ public class DeleteLeaveAllocationCommandHandler :IRequestHandler<DeleteLeaveAll
         if (leaveallocation is null)
             throw new NotFoundException(name: nameof(Domain.LeaveAllocation), key: request.Id);
 
-        await _repository.DeleteAsync(leaveallocation.Id);
+        await _repository.DeleteAsync(leaveallocation);
 
         return Unit.Value;
     }

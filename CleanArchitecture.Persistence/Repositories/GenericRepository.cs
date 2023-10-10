@@ -1,36 +1,49 @@
 ﻿using CleanArchitecture.Application.Parsistence.Contracts;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace CleanArchitecture.Persistence.Repositories;
 
 public class GenericRepository<T> : IGenericRepository<T> where T : class
 {
-    public Task<T> AddAsync(T entity)
+    private readonly LeaveManagmentDbContext _dbContext;
+
+    public GenericRepository(LeaveManagmentDbContext dbContext)
     {
-        throw new NotImplementedException();
+        _dbContext = dbContext;
+    }
+    public async Task<T> AddAsync(T entity)
+    {
+        await _dbContext.AddAsync(entity);
+        await _dbContext.SaveChangesAsync();
+        return entity;
     }
 
-    public Task<T> DeleteAsync(int id)
+    public async Task DeleteAsync(T entity)
     {
-        throw new NotImplementedException();
+        _dbContext.Set<T>().Remove(entity);
+        await _dbContext.SaveChangesAsync();
     }
 
-    public Task<bool> ExistAsync(int id)
+    public async Task<bool> ExistAsync(int id)
     {
-        throw new NotImplementedException();
+        var entity = await GetAsync(id);
+        return entity is not null;
     }
 
-    public Task<IReadOnlyList<T>> GetAllAsync()
+    public async Task<IReadOnlyList<T>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return await _dbContext.Set<T>().ToListAsync();
     }
 
-    public Task<T> GetAsync(int Id)
+    public async Task<T> GetAsync(int Id)
     {
-        throw new NotImplementedException();
+        return await _dbContext.Set<T>().FindAsync(Id);
     }
 
-    public Task<T> UpdateAsync(T entity)
+    public async Task UpdateAsync(T entity)
     {
-        throw new NotImplementedException();
+        _dbContext.Entry(entity).State = EntityState.Modified;
+        await _dbContext.SaveChangesAsync();
     }
 }

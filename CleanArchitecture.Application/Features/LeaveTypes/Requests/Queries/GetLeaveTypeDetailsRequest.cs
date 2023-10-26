@@ -3,7 +3,7 @@ using MediatR;
 
 namespace CleanArchitecture.Application.Features.LeaveTypes.Requests.Queries;
 
-public class GetLeaveAllocationDetailsRequest : IRequest<LeaveTypeDTO>
+public class GetLeaveTypeDetailsRequest : IRequest<LeaveTypeDTO>
 {
     public int Id { get; set; }
 }

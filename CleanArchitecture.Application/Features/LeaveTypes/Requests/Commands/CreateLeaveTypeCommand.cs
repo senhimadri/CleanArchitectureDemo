@@ -10,5 +10,5 @@ namespace CleanArchitecture.Application.Features.LeaveTypes.Requests.Commands;
 
 public class CreateLeaveTypeCommand :IRequest<int>
 {
-    public LeaveTypeDTO leavetypeDTO { get; set; }
+    public CreateLeaveTypeDTO leavetypeDTO { get; set; }
 }

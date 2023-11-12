@@ -7,7 +7,7 @@ using MediatR;
 
 namespace CleanArchitecture.Application.Features.LeaveAllocation.Handlers.Commands;
 
-public class DeleteLeaveAllocationCommandHandler :IRequestHandler<DeleteLeaveAllocationCommand>
+public class DeleteLeaveAllocationCommandHandler :IRequestHandler<DeleteLeaveAllocationCommand, Unit>
 {
     private readonly ILeaveAllocationRepository _repository;
     private readonly IMapper _mapper;

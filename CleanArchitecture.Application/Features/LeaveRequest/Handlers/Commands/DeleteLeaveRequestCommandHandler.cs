@@ -7,7 +7,7 @@ using MediatR;
 
 namespace CleanArchitecture.Application.Features.LeaveRequest.Handlers.Commands;
 
-public class DeleteLeaveRequestCommandHandler :IRequestHandler<DeleteLeaveRequestCommand>
+public class DeleteLeaveRequestCommandHandler :IRequestHandler<DeleteLeaveRequestCommand, Unit>
 {
     private readonly ILeaveRequestRepository _repository;
     private readonly IMapper _mapper;

@@ -40,14 +40,20 @@ namespace CleanArchitecture.API.Controllers
             return Ok(response);
         }
 
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Put(int id, [FromBody] LeaveTypeDTO leavetype)
+        {
+            var command = new UpdateLeaveTypeCommand { LeaveTypeDTO = leavetype };
+            await _mediator.Send(command);
+            return NoContent();
+        }
 
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var command = new DeleteLeaveTypeCommand {id=id };
+            await _mediator.Send(command);
+            return NoContent();
+        }
     }
 }

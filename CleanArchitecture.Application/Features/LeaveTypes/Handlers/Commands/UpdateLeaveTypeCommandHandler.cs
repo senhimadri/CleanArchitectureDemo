@@ -9,12 +9,12 @@ namespace CleanArchitecture.Application.Features.LeaveTypes.Handlers.Commands;
 
 public class UpdateLeaveTypeCommandHandler : IRequestHandler<UpdateLeaveTypeCommand, Unit>
 {
-    private readonly ILeaveTypeRepository _leaveTypeRepository;
+    private readonly IUnitofWork _unitofWork;
     private readonly IMapper _mapper;
 
-    public UpdateLeaveTypeCommandHandler(ILeaveTypeRepository leaveTypeRepository, IMapper mapper)
+    public UpdateLeaveTypeCommandHandler(IUnitofWork unitofWork, IMapper mapper)
     {
-        _leaveTypeRepository = leaveTypeRepository;
+        _unitofWork = unitofWork;
         _mapper = mapper;
     }
     public async Task<Unit> Handle(UpdateLeaveTypeCommand request, CancellationToken cancellationToken)
@@ -27,9 +27,10 @@ public class UpdateLeaveTypeCommandHandler : IRequestHandler<UpdateLeaveTypeComm
         if (!validationResult.IsValid)
             throw new ValidationException(validationResult);
 
-        var leavetype = await _leaveTypeRepository.GetAsync(request.LeaveTypeDTO.Id);
+        var leavetype = await _unitofWork.LeaveTypeRepository.GetAsync(request.LeaveTypeDTO.Id);
         _mapper.Map(request.LeaveTypeDTO, leavetype);
-        await _leaveTypeRepository.UpdateAsync(leavetype);
+        await _unitofWork.LeaveTypeRepository.UpdateAsync(leavetype);
+        await _unitofWork.Save();
         return Unit.Value;
     }
 }

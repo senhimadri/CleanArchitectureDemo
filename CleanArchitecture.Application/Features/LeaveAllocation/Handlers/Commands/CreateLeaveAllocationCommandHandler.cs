@@ -10,25 +10,24 @@ namespace CleanArchitecture.Application.Features.LeaveAllocation.Handlers.Comman
 
 public class CreateLeaveAllocationCommandHandler : IRequestHandler<CreateLeaveAllocationCommand, int>
 {
-    private readonly ILeaveAllocationRepository _LeaveAllocationRepository;
-    private readonly ILeaveTypeRepository _leaveTypeRepository;
+    private readonly IUnitofWork _unitofWork;
     private readonly IMapper _mapper;
 
-    public CreateLeaveAllocationCommandHandler(ILeaveAllocationRepository LeaveAllocationRepository,ILeaveTypeRepository LeaveTypeRepository, IMapper mapper)
+    public CreateLeaveAllocationCommandHandler(IUnitofWork unitofWork, IMapper mapper)
     {
-        _LeaveAllocationRepository = LeaveAllocationRepository;
-        _leaveTypeRepository = LeaveTypeRepository;
+        _unitofWork = unitofWork;
         _mapper = mapper;
     }
     public async Task<int> Handle(CreateLeaveAllocationCommand request, CancellationToken cancellationToken)
     {
-        var validator = new CreateLeaveAllocationDTOValidator(_leaveTypeRepository);
+        var validator = new CreateLeaveAllocationDTOValidator(_unitofWork.LeaveTypeRepository);
         var validationResult = await validator.ValidateAsync(request.LeaveAllocationDTO);
         if (!validationResult.IsValid)
             throw new ValidationException(validationResult);
 
         var leaveallocation = _mapper.Map<Domain.LeaveAllocation>(request.LeaveAllocationDTO);
-        leaveallocation = await _LeaveAllocationRepository.AddAsync(leaveallocation);
+        leaveallocation = await _unitofWork.LeaveAllocationRepository.AddAsync(leaveallocation);
+        await _unitofWork.Save();
         return leaveallocation.Id;
     }
 }

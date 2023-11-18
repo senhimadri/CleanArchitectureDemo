@@ -11,9 +11,9 @@ builder.Services.ConfigureInfrastructureServices(builder.Configuration);
 builder.Services.ConfigurePersistenceServices(builder.Configuration);
 
 builder.Services.AddControllers();
-
-builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddEndpointsApiExplorer();
+
 
 
 builder.Services.AddCors(o =>

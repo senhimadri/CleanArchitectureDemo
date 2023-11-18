@@ -9,26 +9,25 @@ namespace CleanArchitecture.Application.Features.LeaveAllocation.Handlers.Comman
 
 public class UpdateLeaveAllocationCommandHandler : IRequestHandler<UpdateLeaveAllocationCommand, Unit>
 {
-    private readonly ILeaveAllocationRepository _LeaveAllocationRepository;
-    private readonly ILeaveTypeRepository _leaveTypeRepository;
+    private readonly IUnitofWork _unitofWork;
     private readonly IMapper _mapper;
 
-    public UpdateLeaveAllocationCommandHandler(ILeaveAllocationRepository LeaveAllocationRepository, ILeaveTypeRepository LeaveTypeRepository, IMapper mapper)
+    public UpdateLeaveAllocationCommandHandler(IUnitofWork unitofWork, IMapper mapper)
     {
-        _LeaveAllocationRepository = LeaveAllocationRepository;
-        _leaveTypeRepository = LeaveTypeRepository;
+        _unitofWork = unitofWork;
         _mapper = mapper;
     }
     public  async Task<Unit> Handle(UpdateLeaveAllocationCommand request, CancellationToken cancellationToken)
     {
-        var validator = new UpdateLeaveAllocationDTOValidator(_leaveTypeRepository);
+        var validator = new UpdateLeaveAllocationDTOValidator(_unitofWork.LeaveTypeRepository);
         var validationResult = await validator.ValidateAsync(request.LeaveAllocationDTO);
         if (!validationResult.IsValid)
             throw new ValidationException(validationResult);
 
-        var leaveallocation = await _LeaveAllocationRepository.GetAsync(request.LeaveAllocationDTO.Id);
+        var leaveallocation = await _unitofWork.LeaveAllocationRepository.GetAsync(request.LeaveAllocationDTO.Id);
         _mapper.Map(request.LeaveAllocationDTO, leaveallocation);
-        await _LeaveAllocationRepository.UpdateAsync(leaveallocation);
+        await _unitofWork.LeaveAllocationRepository.UpdateAsync(leaveallocation);
+        await _unitofWork.Save();
         return Unit.Value;
     }
 }

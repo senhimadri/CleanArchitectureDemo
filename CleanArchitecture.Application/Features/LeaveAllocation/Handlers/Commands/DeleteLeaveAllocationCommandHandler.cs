@@ -9,22 +9,23 @@ namespace CleanArchitecture.Application.Features.LeaveAllocation.Handlers.Comman
 
 public class DeleteLeaveAllocationCommandHandler :IRequestHandler<DeleteLeaveAllocationCommand, Unit>
 {
-    private readonly ILeaveAllocationRepository _repository;
+    private readonly IUnitofWork _unitofWork;
     private readonly IMapper _mapper;
 
-    public DeleteLeaveAllocationCommandHandler(ILeaveAllocationRepository repository, IMapper mapper)
+    public DeleteLeaveAllocationCommandHandler(IUnitofWork unitofWork, IMapper mapper)
     {
-        _repository = repository;
+        _unitofWork = unitofWork;
         _mapper = mapper;
     }
 
     public async Task<Unit> Handle(DeleteLeaveAllocationCommand request, CancellationToken cancellationToken)
     {
-        var leaveallocation = await _repository.GetAsync(request.Id);
+        var leaveallocation = await _unitofWork.LeaveAllocationRepository.GetAsync(request.Id);
         if (leaveallocation is null)
             throw new NotFoundException(name: nameof(Domain.LeaveAllocation), key: request.Id);
 
-        await _repository.DeleteAsync(leaveallocation);
+        await _unitofWork.LeaveAllocationRepository.DeleteAsync(leaveallocation);
+        await _unitofWork.Save();
 
         return Unit.Value;
     }

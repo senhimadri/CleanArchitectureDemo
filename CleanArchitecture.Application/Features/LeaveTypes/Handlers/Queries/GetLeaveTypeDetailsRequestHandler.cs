@@ -8,17 +8,17 @@ namespace CleanArchitecture.Application.Features.LeaveTypes.Handlers.Queries;
 
 public class GetLeaveTypeDetailsRequestHandler : IRequestHandler<GetLeaveTypeDetailsRequest, LeaveTypeDTO>
 {
-    private readonly ILeaveTypeRepository _leaveTypeRepository;
+    private readonly IUnitofWork _unitofWork;
     private readonly IMapper _mapper;
 
-    public GetLeaveTypeDetailsRequestHandler(ILeaveTypeRepository leaveTypeRepository, IMapper mapper)
+    public GetLeaveTypeDetailsRequestHandler(IUnitofWork unitofWork, IMapper mapper)
     {
-        _leaveTypeRepository = leaveTypeRepository;
+        _unitofWork = unitofWork;
         _mapper = mapper;
     }
     public async Task<LeaveTypeDTO> Handle(GetLeaveTypeDetailsRequest request, CancellationToken cancellationToken)
     {
-        var leavetype = await _leaveTypeRepository.GetAsync(request.Id);
+        var leavetype = await _unitofWork.LeaveTypeRepository.GetAsync(request.Id);
         return _mapper.Map<LeaveTypeDTO>(leavetype);
     }
 }

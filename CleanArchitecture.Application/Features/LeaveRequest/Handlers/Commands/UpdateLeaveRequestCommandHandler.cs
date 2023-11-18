@@ -9,20 +9,21 @@ namespace CleanArchitecture.Application.Features.LeaveRequest.Handlers.Commands;
 
 public class UpdateLeaveRequestCommandHandler : IRequestHandler<UpdateLeaveRequestCommand, Unit>
 {
-    private readonly ILeaveRequestRepository _leaveRequestRepository;
+    //private readonly ILeaveRequestRepository _leaveRequestRepository;
+    private readonly IUnitofWork _unitofWork;
     private readonly ILeaveTypeRepository _leaveTypeRepository;
     private readonly IMapper _mapper;
 
-    public UpdateLeaveRequestCommandHandler(ILeaveRequestRepository LeaveRequestRepository,ILeaveTypeRepository LeaveTypeRepository, IMapper mapper)
+    public UpdateLeaveRequestCommandHandler(IUnitofWork unitofWork, ILeaveTypeRepository LeaveTypeRepository, IMapper mapper)
     {
-        _leaveRequestRepository = LeaveRequestRepository;
+        _unitofWork = unitofWork;
         _leaveTypeRepository = LeaveTypeRepository;
         _mapper = mapper;
     }
     public async Task<Unit> Handle(UpdateLeaveRequestCommand request, CancellationToken cancellationToken)
     {
 
-        var leaverequest = await _leaveRequestRepository.GetAsync(request.RequestId);
+        var leaverequest = await _unitofWork.LeaveRequestRepository.GetAsync(request.RequestId);
 
         if (request.LeaveRequestDTO is not null)
         {
@@ -34,11 +35,12 @@ public class UpdateLeaveRequestCommandHandler : IRequestHandler<UpdateLeaveReque
                 throw new ValidationException(validationResult);
 
             _mapper.Map(request.LeaveRequestDTO, leaverequest);
-            await _leaveRequestRepository.UpdateAsync(leaverequest);
+            await _unitofWork.LeaveRequestRepository.UpdateAsync(leaverequest);
         }
         else if(request.ChangeLeaveRequestApprovalDTO is not null)
         {
-            await _leaveRequestRepository.ChangeApprovalStatus(leaverequest, request.ChangeLeaveRequestApprovalDTO.IsApproved);
+            await _unitofWork.LeaveRequestRepository.ChangeApprovalStatus(leaverequest, request.ChangeLeaveRequestApprovalDTO.IsApproved);
+            await _unitofWork.Save();
         }
 
         return Unit.Value;

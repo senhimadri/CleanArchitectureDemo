@@ -15,19 +15,16 @@ namespace CleanArchitecture.Application.Features.LeaveRequest.Handlers.Commands;
 
 public class CreateLeaveRequestCommandHandler : IRequestHandler<CreateLeaveRequestCommand, BaseCommandResponse>
 {
-    private readonly ILeaveRequestRepository _leaveRequestRepository;
-    private readonly ILeaveTypeRepository _leaveTypeRepository;
+    private readonly IUnitofWork _unitofWork;
     private readonly IEmailSender _emailSender;
     private readonly IMapper _mapper;
 
 
-    public CreateLeaveRequestCommandHandler(ILeaveRequestRepository leaveRequestRepository,
-                                            ILeaveTypeRepository leaveTypeRepository,
+    public CreateLeaveRequestCommandHandler(IUnitofWork unitofWork,
                                             IEmailSender emailSender,
                                             IMapper mapper)
     {
-        _leaveRequestRepository = leaveRequestRepository;
-        _leaveTypeRepository = leaveTypeRepository;
+        _unitofWork = unitofWork;
         _emailSender = emailSender;
         _mapper = mapper;
     }
@@ -35,7 +32,7 @@ public class CreateLeaveRequestCommandHandler : IRequestHandler<CreateLeaveReque
     {
         var response = new BaseCommandResponse();
 
-        var validator = new CreateLeaveRequestDTOValidator(_leaveTypeRepository);
+        var validator = new CreateLeaveRequestDTOValidator(_unitofWork.LeaveTypeRepository);
 
         var validationResult = await validator.ValidateAsync(request.CreateLeaveRequestDTO);
 
@@ -48,7 +45,9 @@ public class CreateLeaveRequestCommandHandler : IRequestHandler<CreateLeaveReque
            
 
         var leaverequest = _mapper.Map<Domain.LeaveRequest>(request.CreateLeaveRequestDTO);
-        leaverequest = await _leaveRequestRepository.AddAsync(leaverequest);
+        leaverequest = await _unitofWork.LeaveRequestRepository.AddAsync(leaverequest);
+        await _unitofWork.Save();
+
 
         response.Success = true;
         response.Message = "Creation Successful.";

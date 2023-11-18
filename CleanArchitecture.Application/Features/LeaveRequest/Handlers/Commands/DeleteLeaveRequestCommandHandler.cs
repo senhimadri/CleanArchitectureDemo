@@ -9,22 +9,24 @@ namespace CleanArchitecture.Application.Features.LeaveRequest.Handlers.Commands;
 
 public class DeleteLeaveRequestCommandHandler :IRequestHandler<DeleteLeaveRequestCommand, Unit>
 {
-    private readonly ILeaveRequestRepository _repository;
+    //private readonly ILeaveRequestRepository _repository;
+    private readonly IUnitofWork _unitofWork;
     private readonly IMapper _mapper;
 
-    public DeleteLeaveRequestCommandHandler(ILeaveRequestRepository repository, IMapper mapper)
+    public DeleteLeaveRequestCommandHandler(IUnitofWork unitofWork, IMapper mapper)
     {
-        _repository = repository;
+        _unitofWork = unitofWork;
         _mapper = mapper;
     }
 
     public async Task<Unit> Handle(DeleteLeaveRequestCommand request, CancellationToken cancellationToken)
     {
-        var leaverequest = await _repository.GetAsync(request.Id);
+        var leaverequest = await _unitofWork.LeaveRequestRepository.GetAsync(request.Id);
         if (leaverequest is null)
             throw new NotFoundException(name: nameof(Domain.LeaveRequest), key: request.Id);
 
-        await _repository.DeleteAsync(leaverequest);
+        await _unitofWork.LeaveRequestRepository.DeleteAsync(leaverequest);
+        await _unitofWork.Save();
 
         return Unit.Value;
     }

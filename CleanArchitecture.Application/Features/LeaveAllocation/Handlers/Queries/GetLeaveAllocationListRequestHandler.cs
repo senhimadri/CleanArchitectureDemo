@@ -8,18 +8,18 @@ namespace CleanArchitecture.Application.Features.LeaveAllocation.Handlers.Querie
 
 public class GetLeaveRequestListRequestHandler : IRequestHandler<GetLeaveRequestListRequest, List<LeaveAllocationDTO>>
 {
-    private readonly ILeaveAllocationRepository _repository;
+    private readonly IUnitofWork _unitofWork;
     private readonly IMapper _mapper;
 
-    public GetLeaveRequestListRequestHandler(ILeaveAllocationRepository repository, IMapper mapper)
+    public GetLeaveRequestListRequestHandler(IUnitofWork unitofWork, IMapper mapper)
     {
-        _repository = repository;
+        _unitofWork = unitofWork;
         _mapper = mapper;
     }
 
     public async Task<List<LeaveAllocationDTO>> Handle(GetLeaveRequestListRequest request, CancellationToken cancellationToken)
     {
-        var leavetype = await _repository.GetLeaveAllocationsListWithDetailsAsync();
+        var leavetype = await _unitofWork.LeaveAllocationRepository.GetLeaveAllocationsListWithDetailsAsync();
         return _mapper.Map<List<LeaveAllocationDTO>>(leavetype);
     }
 }

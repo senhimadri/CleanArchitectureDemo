@@ -12,12 +12,13 @@ namespace CleanArchitecture.Application.Features.LeaveTypes.Handlers.Commands;
 
 public class CreateLeaveTypeCommandHandler : IRequestHandler<CreateLeaveTypeCommand, int>
 {
-    private readonly ILeaveTypeRepository _leaveTypeRepository;
+    //private readonly ILeaveTypeRepository _leaveTypeRepository;
+    private readonly IUnitofWork _unitofWork;
     private readonly IMapper _mapper;
 
-    public CreateLeaveTypeCommandHandler(ILeaveTypeRepository leaveTypeRepository, IMapper mapper)
+    public CreateLeaveTypeCommandHandler(IUnitofWork unitofWork, IMapper mapper)
     {
-        _leaveTypeRepository = leaveTypeRepository;
+        _unitofWork = unitofWork;
         _mapper = mapper;
     }
     public async Task<int> Handle(CreateLeaveTypeCommand request, CancellationToken cancellationToken)
@@ -30,7 +31,9 @@ public class CreateLeaveTypeCommandHandler : IRequestHandler<CreateLeaveTypeComm
             throw new ValidationException(validationResult);
 
         var leavetype = _mapper.Map<LeaveType>(request.leavetypeDTO);
-        leavetype = await _leaveTypeRepository.AddAsync(leavetype);
+        leavetype = await _unitofWork.LeaveTypeRepository.AddAsync(leavetype);
+        await _unitofWork.Save();
+
         return leavetype.Id;
     }
 }

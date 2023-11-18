@@ -9,18 +9,18 @@ namespace CleanArchitecture.Application.Features.LeaveRequest.Handlers.Queries;
 
 public class GetLeaveRequestListRequestHandler : IRequestHandler<GetLeaveRequestListRequest, List<LeaveRequestDTO>>
 {
-    private readonly ILeaveRequestRepository _repository;
+    private readonly IUnitofWork _unitofWork;
     private readonly IMapper _mapper;
 
-    public GetLeaveRequestListRequestHandler(ILeaveRequestRepository repository, IMapper mapper)
+    public GetLeaveRequestListRequestHandler(IUnitofWork unitofWork, IMapper mapper)
     {
-        _repository = repository;
+        _unitofWork = unitofWork;
         _mapper = mapper;
     }
 
     public async Task<List<LeaveRequestDTO>> Handle(GetLeaveRequestListRequest request, CancellationToken cancellationToken)
     {
-        var leavetype = await _repository.GetLeaveRequestListWithDetailsAsync();
+        var leavetype = await _unitofWork.LeaveRequestRepository.GetLeaveRequestListWithDetailsAsync();
         return _mapper.Map<List<LeaveRequestDTO>>(leavetype);
     }
 }

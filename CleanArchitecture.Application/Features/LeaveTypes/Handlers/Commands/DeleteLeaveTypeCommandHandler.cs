@@ -9,22 +9,23 @@ namespace CleanArchitecture.Application.Features.LeaveTypes.Handlers.Commands;
 
 public class DeleteLeaveTypeCommandHandler : IRequestHandler<DeleteLeaveTypeCommand,Unit>
 {
-    private readonly ILeaveTypeRepository _leaveTypeRepository;
+    private readonly IUnitofWork _unitofWork;
     private readonly IMapper _mapper;
 
-    public DeleteLeaveTypeCommandHandler(ILeaveTypeRepository leaveTypeRepository, IMapper mapper)
+    public DeleteLeaveTypeCommandHandler(IUnitofWork unitofWork, IMapper mapper)
     {
-        _leaveTypeRepository = leaveTypeRepository;
+        _unitofWork = unitofWork;
         _mapper = mapper;
     }
     public async Task<Unit> Handle(DeleteLeaveTypeCommand request, CancellationToken cancellationToken)
     {
-        var leavetype =await _leaveTypeRepository.GetAsync(request.id);
+        var leavetype =await _unitofWork.LeaveTypeRepository.GetAsync(request.id);
 
         if (leavetype is null)
             throw new NotFoundException(name:nameof(LeaveType),key: request.id);
 
-        await _leaveTypeRepository.DeleteAsync(leavetype);
+        await _unitofWork.LeaveTypeRepository.DeleteAsync(leavetype);
+        await _unitofWork.Save();
 
         return Unit.Value;
     }

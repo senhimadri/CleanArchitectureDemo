@@ -18,7 +18,7 @@ public class LeaveManagmentDbContextFactory : IDesignTimeDbContextFactory<LeaveM
 
         var connectionString = configuration.GetConnectionString("LeaveManagementConnectionString");
 
-        builder.UseSqlite(connectionString);
+        builder.UseSqlServer(connectionString);
 
         return new LeaveManagmentDbContext(builder.Options);
     }

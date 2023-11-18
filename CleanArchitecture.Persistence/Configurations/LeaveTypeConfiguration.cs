@@ -22,7 +22,7 @@ public class LeaveTypeConfiguration : IEntityTypeConfiguration<LeaveType>
             },
             new LeaveType
             {
-                Id = 1,
+                Id = 2,
                 DefaultDays = 12,
                 Name = "Sick"
             }

@@ -11,7 +11,7 @@ public static class PersistenceServicesRegistration
     public static IServiceCollection ConfigurePersistenceServices(this IServiceCollection services,IConfiguration configuration)
     {
         services.AddDbContext<LeaveManagmentDbContext>(options =>
-            options.UseSqlite(configuration.GetConnectionString("LeaveManagmentConnectionString")));
+            options.UseSqlServer(configuration.GetConnectionString("LeaveManagmentConnectionString")));
 
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 

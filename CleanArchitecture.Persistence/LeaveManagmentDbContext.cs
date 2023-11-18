@@ -20,11 +20,11 @@ public class LeaveManagmentDbContext: DbContext
     {
         foreach (var entity in ChangeTracker.Entries<BaseDomainEntity>())
         {
-            entity.Entity.LastModifiedDate = DateTime.Now;
+            entity.Entity.LastModifiedDate = DateTime.UtcNow;
 
             if (entity.State == EntityState.Added)
             {
-                entity.Entity.DateCreated = DateTime.Now;
+                entity.Entity.DateCreated = DateTime.UtcNow;
             }
         }
 

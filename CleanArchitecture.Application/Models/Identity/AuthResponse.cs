@@ -1,6 +1,6 @@
 ﻿namespace CleanArchitecture.Application.Models.Identity;
 
-public class AuthRemponse
+public class AuthResponse
 {
     public string Id { get; set; }
     public string UserName { get; set; }

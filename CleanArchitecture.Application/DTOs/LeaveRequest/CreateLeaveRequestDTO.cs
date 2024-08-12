@@ -2,7 +2,7 @@
 
 namespace CleanArchitecture.Application.DTOs.LeaveRequest;
 
-public class CreateLeaveRequestDTO: IleaveRequestDTO
+public class CreateLeaveRequestDTO : IleaveRequestDTO
 {
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }

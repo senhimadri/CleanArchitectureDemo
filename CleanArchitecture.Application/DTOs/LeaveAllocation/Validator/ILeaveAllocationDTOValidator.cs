@@ -3,12 +3,12 @@ using FluentValidation;
 
 namespace CleanArchitecture.Application.DTOs.LeaveAllocation.Validator;
 
-public class ILeaveAllocationDTOValidator: AbstractValidator<ILeaveAllocationDTO>
+public class ILeaveAllocationDTOValidator : AbstractValidator<ILeaveAllocationDTO>
 {
     private readonly ILeaveTypeRepository _leaveTypeRepository;
     public ILeaveAllocationDTOValidator(ILeaveTypeRepository leaveTypeRepository)
     {
-        _leaveTypeRepository= leaveTypeRepository;
+        _leaveTypeRepository = leaveTypeRepository;
 
         RuleFor(p => p.NumberOfDays)
             .GreaterThan(0).WithMessage("{PropertyName} must be greater than {ComparisonValue}.");

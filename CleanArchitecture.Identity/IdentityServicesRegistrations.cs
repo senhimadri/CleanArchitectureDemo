@@ -22,9 +22,9 @@ public static class IdentityServicesRegistrations
     {
         services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 
-        services.AddDbContext<LeaveManagementIdentityDBContex>(option=>
+        services.AddDbContext<LeaveManagementIdentityDBContex>(option =>
                 option.UseSqlServer(configuration.GetConnectionString("LeaveManagementIdentityConnectionString"),
-                b=>b.MigrationsAssembly(typeof(LeaveManagementIdentityDBContex).Assembly.FullName)));
+                b => b.MigrationsAssembly(typeof(LeaveManagementIdentityDBContex).Assembly.FullName)));
 
 
         services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -33,12 +33,12 @@ public static class IdentityServicesRegistrations
 
         //services.AddTransient<IAuthService, AuthServices>();
 
-        services.AddAuthentication(options=>
+        services.AddAuthentication(options =>
         {
             options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
             options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         })
-            .AddJwtBearer(option=>
+            .AddJwtBearer(option =>
         {
             option.TokenValidationParameters = new TokenValidationParameters
             {

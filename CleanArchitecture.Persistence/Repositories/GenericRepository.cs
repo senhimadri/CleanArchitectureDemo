@@ -1,10 +1,11 @@
 ﻿using CleanArchitecture.Application.Contracts.Parsistence;
+using CleanArchitecture.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace CleanArchitecture.Persistence.Repositories;
 
-public class GenericRepository<T> : IGenericRepository<T> where T : class
+public class GenericRepository<T> : IGenericRepository<T> where T : BaseDomainEntity
 {
     private readonly LeaveManagmentDbContext _dbContext;
 
@@ -42,5 +43,9 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     public async Task UpdateAsync(T entity)
     {
         _dbContext.Entry(entity).State = EntityState.Modified;
+    }
+
+    public async Task SoftDelete(long Id)
+    {
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 namespace CleanArchitecture.Application.Contracts.Parsistence;
 
-public  interface IGenericRepository<T> where T : class
+public interface IGenericRepository<T> where T : class
 {
     Task<T> GetAsync(int Id);
     Task<IReadOnlyList<T>> GetAllAsync();

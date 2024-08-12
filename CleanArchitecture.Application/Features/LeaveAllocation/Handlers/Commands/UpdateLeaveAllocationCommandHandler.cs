@@ -17,7 +17,7 @@ public class UpdateLeaveAllocationCommandHandler : IRequestHandler<UpdateLeaveAl
         _unitofWork = unitofWork;
         _mapper = mapper;
     }
-    public  async Task<Unit> Handle(UpdateLeaveAllocationCommand request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(UpdateLeaveAllocationCommand request, CancellationToken cancellationToken)
     {
         var validator = new UpdateLeaveAllocationDTOValidator(_unitofWork.LeaveTypeRepository);
         var validationResult = await validator.ValidateAsync(request.LeaveAllocationDTO);

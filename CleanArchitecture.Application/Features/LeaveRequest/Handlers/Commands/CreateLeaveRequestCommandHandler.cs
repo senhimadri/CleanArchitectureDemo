@@ -42,7 +42,7 @@ public class CreateLeaveRequestCommandHandler : IRequestHandler<CreateLeaveReque
             response.Message = "Creation Failed.";
             response.Errors = validationResult.Errors.Select(x => x.ErrorMessage).ToList();
         }
-           
+
 
         var leaverequest = _mapper.Map<Domain.LeaveRequest>(request.CreateLeaveRequestDTO);
         leaverequest = await _unitofWork.LeaveRequestRepository.AddAsync(leaverequest);

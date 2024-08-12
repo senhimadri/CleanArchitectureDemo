@@ -11,7 +11,7 @@ public class EmailSender : IEmailSender
     private EmailSettings _emailsettings { get; }
     public EmailSender(IOptions<EmailSettings> emailSettings)
     {
-        _emailsettings= emailSettings.Value;
+        _emailsettings = emailSettings.Value;
     }
 
     public async Task<bool> SendEmail(Email email)

@@ -8,7 +8,7 @@ namespace CleanArchitecture.Persistence;
 
 public static class PersistenceServicesRegistration
 {
-    public static IServiceCollection ConfigurePersistenceServices(this IServiceCollection services,IConfiguration configuration)
+    public static IServiceCollection ConfigurePersistenceServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<LeaveManagmentDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("LeaveManagementConnectionString")));

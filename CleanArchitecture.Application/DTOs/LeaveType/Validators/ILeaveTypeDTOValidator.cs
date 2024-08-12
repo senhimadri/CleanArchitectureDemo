@@ -2,7 +2,7 @@
 
 namespace CleanArchitecture.Application.DTOs.LeaveType.Validators;
 
-public class ILeaveTypeDTOValidator:AbstractValidator<ILeaveTypeDTO>
+public class ILeaveTypeDTOValidator : AbstractValidator<ILeaveTypeDTO>
 {
     public ILeaveTypeDTOValidator()
     {

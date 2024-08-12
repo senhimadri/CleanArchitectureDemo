@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CleanArchitecture.Domain;
 
-public class LeaveAllocation: BaseDomainEntity
+public class LeaveAllocation : BaseDomainEntity
 {
     public int NumberOfDays { get; set; }
     public LeaveType LeaveType { get; set; }

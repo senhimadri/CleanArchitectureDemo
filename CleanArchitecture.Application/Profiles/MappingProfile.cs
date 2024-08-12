@@ -6,7 +6,7 @@ using CleanArchitecture.Domain;
 
 namespace CleanArchitecture.Application.Profiles;
 
-public class MappingProfile: Profile
+public class MappingProfile : Profile
 {
     public MappingProfile()
     {

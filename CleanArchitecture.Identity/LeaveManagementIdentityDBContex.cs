@@ -10,21 +10,21 @@ using System.Threading.Tasks;
 
 namespace CleanArchitecture.Identity;
 
-internal class LeaveManagementIdentityDBContex: IdentityDbContext<ApplicationUser>
+internal class LeaveManagementIdentityDBContex : IdentityDbContext<ApplicationUser>
 {
-	public LeaveManagementIdentityDBContex(DbContextOptions<LeaveManagementIdentityDBContex> options)
-		:base(options)
-	{
+    public LeaveManagementIdentityDBContex(DbContextOptions<LeaveManagementIdentityDBContex> options)
+        : base(options)
+    {
 
-	}
+    }
 
-	protected override void OnModelCreating(ModelBuilder modelBuilder)
-	{
-		base.OnModelCreating(modelBuilder);
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
 
-		modelBuilder.ApplyConfiguration(new RoleConfiguration());
-		modelBuilder.ApplyConfiguration(new UserConfiguration());
-		modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
-	}
+        modelBuilder.ApplyConfiguration(new RoleConfiguration());
+        modelBuilder.ApplyConfiguration(new UserConfiguration());
+        modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
+    }
 }
 

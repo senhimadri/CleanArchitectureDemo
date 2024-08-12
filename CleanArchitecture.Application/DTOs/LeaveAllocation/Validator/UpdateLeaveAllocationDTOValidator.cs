@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace CleanArchitecture.Application.DTOs.LeaveAllocation.Validator;
 
-public class UpdateLeaveAllocationDTOValidator: AbstractValidator<UpdateLeaveAllocationDTO>
+public class UpdateLeaveAllocationDTOValidator : AbstractValidator<UpdateLeaveAllocationDTO>
 {
     private readonly ILeaveTypeRepository _leaveTypeRepository;
     public UpdateLeaveAllocationDTOValidator(ILeaveTypeRepository leaveTypeRepository)

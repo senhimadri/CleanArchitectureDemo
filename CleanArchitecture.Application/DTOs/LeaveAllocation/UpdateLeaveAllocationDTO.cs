@@ -2,7 +2,7 @@
 
 namespace CleanArchitecture.Application.DTOs.LeaveAllocation;
 
-public class UpdateLeaveAllocationDTO: BaseDTO, ILeaveAllocationDTO
+public class UpdateLeaveAllocationDTO : BaseDTO, ILeaveAllocationDTO
 {
     public int NumberOfDays { get; set; }
     public int LeaveTypeId { get; set; }

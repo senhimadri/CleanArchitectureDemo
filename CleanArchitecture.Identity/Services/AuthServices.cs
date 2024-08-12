@@ -21,7 +21,7 @@ namespace CleanArchitecture.Identity.Services
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly JwtSettings _jwtSettings;
 
-        public AuthServices(UserManager<ApplicationUser> userManager, 
+        public AuthServices(UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             JwtSettings jwtSettings)
         {

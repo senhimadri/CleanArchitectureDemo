@@ -2,7 +2,7 @@
 
 namespace CleanArchitecture.Application.Contracts.Parsistence;
 
-public interface ILeaveTypeRepository:IGenericRepository<LeaveType>
+public interface ILeaveTypeRepository : IGenericRepository<LeaveType>
 {
     Task ChangeApprovalStatus(LeaveType leaverequest, bool? approvalstatus);
 }

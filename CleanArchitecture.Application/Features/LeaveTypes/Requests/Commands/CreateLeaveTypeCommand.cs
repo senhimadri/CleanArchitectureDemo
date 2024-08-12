@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CleanArchitecture.Application.Features.LeaveTypes.Requests.Commands;
 
-public class CreateLeaveTypeCommand :IRequest<int>
+public class CreateLeaveTypeCommand : IRequest<int>
 {
     public CreateLeaveTypeDTO leavetypeDTO { get; set; }
 }

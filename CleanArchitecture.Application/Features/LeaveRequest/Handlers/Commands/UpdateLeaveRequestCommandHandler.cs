@@ -37,7 +37,7 @@ public class UpdateLeaveRequestCommandHandler : IRequestHandler<UpdateLeaveReque
             _mapper.Map(request.LeaveRequestDTO, leaverequest);
             await _unitofWork.LeaveRequestRepository.UpdateAsync(leaverequest);
         }
-        else if(request.ChangeLeaveRequestApprovalDTO is not null)
+        else if (request.ChangeLeaveRequestApprovalDTO is not null)
         {
             await _unitofWork.LeaveRequestRepository.ChangeApprovalStatus(leaverequest, request.ChangeLeaveRequestApprovalDTO.IsApproved);
             await _unitofWork.Save();

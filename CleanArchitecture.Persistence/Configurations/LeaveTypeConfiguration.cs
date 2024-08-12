@@ -17,8 +17,8 @@ public class LeaveTypeConfiguration : IEntityTypeConfiguration<LeaveType>
             new LeaveType
             {
                 Id = 1,
-                DefaultDays=10,
-                Name="Vacation"
+                DefaultDays = 10,
+                Name = "Vacation"
             },
             new LeaveType
             {
@@ -27,5 +27,7 @@ public class LeaveTypeConfiguration : IEntityTypeConfiguration<LeaveType>
                 Name = "Sick"
             }
         );
+
+
     }
 }

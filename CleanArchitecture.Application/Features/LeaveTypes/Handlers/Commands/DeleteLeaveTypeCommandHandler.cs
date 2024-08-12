@@ -7,7 +7,7 @@ using MediatR;
 
 namespace CleanArchitecture.Application.Features.LeaveTypes.Handlers.Commands;
 
-public class DeleteLeaveTypeCommandHandler : IRequestHandler<DeleteLeaveTypeCommand,Unit>
+public class DeleteLeaveTypeCommandHandler : IRequestHandler<DeleteLeaveTypeCommand, Unit>
 {
     private readonly IUnitofWork _unitofWork;
     private readonly IMapper _mapper;
@@ -19,10 +19,10 @@ public class DeleteLeaveTypeCommandHandler : IRequestHandler<DeleteLeaveTypeComm
     }
     public async Task<Unit> Handle(DeleteLeaveTypeCommand request, CancellationToken cancellationToken)
     {
-        var leavetype =await _unitofWork.LeaveTypeRepository.GetAsync(request.id);
+        var leavetype = await _unitofWork.LeaveTypeRepository.GetAsync(request.id);
 
         if (leavetype is null)
-            throw new NotFoundException(name:nameof(LeaveType),key: request.id);
+            throw new NotFoundException(name: nameof(LeaveType), key: request.id);
 
         await _unitofWork.LeaveTypeRepository.DeleteAsync(leavetype);
         await _unitofWork.Save();

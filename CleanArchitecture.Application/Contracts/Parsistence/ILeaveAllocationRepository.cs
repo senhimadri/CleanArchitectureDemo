@@ -2,7 +2,7 @@
 
 namespace CleanArchitecture.Application.Contracts.Parsistence;
 
-public interface ILeaveAllocationRepository:IGenericRepository<LeaveAllocation>
+public interface ILeaveAllocationRepository : IGenericRepository<LeaveAllocation>
 {
     Task<LeaveAllocation> GetLeaveAllocationWithDetailsAsync(int id);
     Task<List<LeaveAllocation>> GetLeaveAllocationsListWithDetailsAsync();

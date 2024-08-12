@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CleanArchitecture.Application.DTOs.LeaveRequest;
 
-public class LeaveRequestListDTO: BaseDTO
+public class LeaveRequestListDTO : BaseDTO
 {
     public LeaveTypeDTO LeaveType { get; set; }
     public DateTime DateRequested { get; set; }

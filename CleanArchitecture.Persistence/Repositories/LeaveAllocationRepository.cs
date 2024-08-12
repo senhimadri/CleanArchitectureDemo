@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CleanArchitecture.Persistence.Repositories;
 
-public class LeaveAllocationRepository: GenericRepository<LeaveAllocation>, ILeaveAllocationRepository
+public class LeaveAllocationRepository : GenericRepository<LeaveAllocation>, ILeaveAllocationRepository
 {
     private readonly LeaveManagmentDbContext _dbContext;
     public LeaveAllocationRepository(LeaveManagmentDbContext dbContext) : base(dbContext)
@@ -29,7 +29,7 @@ public class LeaveAllocationRepository: GenericRepository<LeaveAllocation>, ILea
     {
         var leaveallocation = await _dbContext.LeaveAllocations
              .Include(q => q.LeaveType)
-             .FirstOrDefaultAsync(x=>x.Id==id);
+             .FirstOrDefaultAsync(x => x.Id == id);
         return leaveallocation;
     }
 }
